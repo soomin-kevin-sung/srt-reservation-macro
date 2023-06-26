@@ -4,7 +4,7 @@ from selenium import webdriver
 
 def main():
     driver = webdriver.Chrome()
-    url = 'https://etk.srail.kr/'
+    url = 'https://etk.srail.kr/hpg/hra/01/selectScheduleList.do?pageId=TK0101010000'
     driver.get(url)
     page_source = driver.page_source
 
@@ -30,6 +30,8 @@ def main():
     psg_children_selector.select_by_index(1)
 
     search_button.click()
+    while True:
+        pass
 
 
 if __name__ == '__main__':
