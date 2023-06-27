@@ -1,37 +1,17 @@
 from selenium.webdriver.support.ui import Select
 from selenium import webdriver
+from webController import webControllerOption
+from webController import webController
 
 
 def main():
-    driver = webdriver.Chrome()
-    url = 'https://etk.srail.kr/hpg/hra/01/selectScheduleList.do?pageId=TK0101010000'
-    driver.get(url)
-    page_source = driver.page_source
+    op = webControllerOption('20230627', '180000', '수서', '부산', True)
+    wc = webController(op)
 
-    # 선작업
-    driver.execute_script(
-        'document.getElementsByName(\'dptDt\')[0]' +
-        '.removeAttribute(\'readonly\')')
+    if not wc.login('ssm0725@gmail.com', 'soomin0725@'):
+        print("로그인 실패")
 
-    start_selector = Select(driver.find_element('name', 'dptRsStnCd'))
-    end_selector = Select(driver.find_element('name', 'arvRsStnCd'))
-    start_date_input = driver.find_element('name', 'dptDt')
-    psg_adults_selector = Select(driver.find_element('name', 'psgInfoPerPrnb1'))
-    psg_children_selector = Select(driver.find_element('name', 'psgInfoPerPrnb5'))
-    search_button = driver.find_element('xpath', '//*[@id="search-form"]/fieldset/a')
-
-    start_selector.select_by_visible_text('수서')
-    end_selector.select_by_visible_text('부산')
-
-    start_date_input.clear()
-    start_date_input.send_keys('2023.06.29')
-
-    psg_adults_selector.select_by_index(0)
-    psg_children_selector.select_by_index(1)
-
-    search_button.click()
-    while True:
-        pass
+    wc.run_macro()
 
 
 if __name__ == '__main__':
