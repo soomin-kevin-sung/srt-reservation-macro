@@ -1,5 +1,3 @@
-from selenium.webdriver.support.ui import Select
-from selenium import webdriver
 from webController import webControllerOption
 from webController import webController
 
