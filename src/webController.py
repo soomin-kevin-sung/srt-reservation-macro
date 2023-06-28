@@ -1,27 +1,41 @@
 import time
 
-from selenium.webdriver.support.ui import Select
 from selenium import webdriver
+from selenium.common import NoAlertPresentException
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import Select
 
 
 class webControllerOption:
-    def __init__(self, dpt_dt, dpt_tm, dpt_sta, arv_sta, check_suite):
+    def __init__(self, dpt_dt, dpt_tm, dpt_sta, arv_sta):
         self.dpt_dt = dpt_dt
         self.dpt_tm = dpt_tm
         self.dpt_sta = dpt_sta
         self.arv_sta = arv_sta
-        self.check_suite = check_suite
+        self.check_suite = True
+        self.observe_num_of_items = 5
+
+    def set_observe_num_of_items(self, value):
+        self.observe_num_of_items = value
+
+    def set_check_suite(self, value):
+        self.check_suite = value
 
 
 class webController:
     def __init__(self, option: webControllerOption):
-        self.driver = webdriver.Chrome()
+        # 변수 설정
         self.is_logged_in = False
         self.option = option
+        
+        # detach option 추가
+        options = Options()
+        options.add_experimental_option("detach", True)
+        
+        # driver 설정
+        self.driver = webdriver.Chrome(options=options)
 
     def login(self, email, password):
-        from selenium.common import NoAlertPresentException
-
         driver = self.driver
         driver.get('https://etk.srail.kr/cmc/01/selectLoginForm.do?pageId=TK0701000000')
 
@@ -76,12 +90,50 @@ class webController:
         time_selector = Select(driver.find_element('name', 'dptTm'))
         time_selector.select_by_value(self.option.dpt_tm)
 
-        is_success = False
-        while not is_success:
-            # 조회 폼 사용
+        escape = False
+        while not escape:
+            # 조회 폼 가져오기
             search_form = driver.find_element('name', 'search-form')
+
+            # 조회 submit
             search_form.submit()
-            driver.implicitly_wait(5)
-            time.sleep(0.5)
 
+            try:
+                # 로딩 기다리기
+                driver.implicitly_wait(5)
+                # 나머지 요소들 로딩을 위해 1초 기다림
+                time.sleep(1)
+            # timeout 시 return false
+            except TimeoutError:
+                return False
 
+            # option에서 지정한 갯수만큼 위에서 검사
+            for i in range(self.option.observe_num_of_items):
+                xpaths = [
+                    # 일반실 예약하기 버튼 내 span xpath
+                    f'//*[@id="result-form"]/fieldset/div[6]/table/tbody/tr[{i + 1}]/td[7]/a/span',
+                    # 특실 예약하기 버튼 내 span xpath
+                    f'//*[@id="result-form"]/fieldset/div[6]/table/tbody/tr[{i + 1}]/td[6]/a/span',
+                ]
+
+                # 지정된 xpath를 순회
+                for xpath in xpaths:
+                    # span 추출
+                    spans = driver.find_elements('xpath', xpath)
+                    # span이 있고, text가 예약하기라면
+                    if len(spans) and spans[0].text == '예약하기':
+                        # 부모 element를 클릭
+                        spans[0].find_element('xpath', '..').click()
+                        return True
+
+        return True
+
+    def close(self):
+        self.driver.close()
+
+    def is_closed(self):
+        try:
+            _ = self.driver.current_window_handle
+            return False
+        except:
+            return True
