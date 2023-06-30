@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frmMain</class>
+ <widget class="QWidget" name="frmMain">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>240</width>
+    <height>310</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>SRT 예약 매크로</string>
+  </property>
+  <widget class="QGroupBox" name="grpReservationInfo">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>100</y>
+     <width>220</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>예약정보</string>
+   </property>
+   <widget class="QComboBox" name="cboDeparture">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>50</y>
+      <width>120</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="editable">
+     <bool>false</bool>
+    </property>
+    <item>
+     <property name="text">
+      <string>수서</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>동탄</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>평택지제</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>천안아산</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>오송</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>대전</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>김천(구미)</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>서대구</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>동대구</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>신경주</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>울산(통도사)</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>부산</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>공주</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>익산</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>정읍</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>광주송정</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>나주</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>목포</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lblDeparture">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>출발역 :</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblArrival">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>도착역 :</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblTime">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>시간대 :</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cboTime">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>110</y>
+      <width>120</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>00시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>02시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>04시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>06시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>08시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>10시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>12시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>14시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>16시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>18시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>20시 이후</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>22시 이후</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QCheckBox" name="chkSuite">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>140</y>
+      <width>76</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>특실 포함</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+    <property name="tristate">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cboArrival">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>80</y>
+      <width>120</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>수서</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>동탄</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>평택지제</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>천안아산</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>오송</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>대전</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>김천(구미)</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>서대구</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>동대구</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>신경주</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>울산(통도사)</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>부산</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>공주</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>익산</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>정읍</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>광주송정</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>나주</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>목포</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="lblDate">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>날짜 :</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="dtDeparture">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>20</y>
+      <width>120</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="grpAccount">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>220</width>
+     <height>82</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>계정 정보</string>
+   </property>
+   <widget class="QLineEdit" name="txtID">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>20</y>
+      <width>120</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblID">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>E-Mail :</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblPassword">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>비밀번호 :</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtPassword">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>50</y>
+      <width>120</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="btnRunMacro">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>280</y>
+     <width>90</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>매크로 실행</string>
+   </property>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>txtID</tabstop>
+  <tabstop>txtPassword</tabstop>
+  <tabstop>cboDeparture</tabstop>
+  <tabstop>cboArrival</tabstop>
+  <tabstop>cboTime</tabstop>
+  <tabstop>chkSuite</tabstop>
+  <tabstop>btnRunMacro</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+ <slots>
+  <slot>onClicked_btnRunMacro()</slot>
+ </slots>
+</ui>

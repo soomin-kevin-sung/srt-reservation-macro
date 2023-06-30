@@ -1,3 +1,6 @@
 src/.idea
 src/__pycache__
 src/ui/__pycache__
+src/build
+src/dist
+*.spec

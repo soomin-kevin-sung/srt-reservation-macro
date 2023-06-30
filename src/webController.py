@@ -2,6 +2,7 @@ import time
 
 from selenium import webdriver
 from selenium.common import NoAlertPresentException
+from selenium.webdriver import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import Select
 
@@ -13,7 +14,7 @@ class webControllerOption:
         self.dpt_sta = dpt_sta
         self.arv_sta = arv_sta
         self.check_suite = True
-        self.observe_num_of_items = 5
+        self.observe_num_of_items = 10
 
     def set_observe_num_of_items(self, value):
         self.observe_num_of_items = value
@@ -101,20 +102,20 @@ class webController:
             try:
                 # 로딩 기다리기
                 driver.implicitly_wait(5)
-                # 나머지 요소들 로딩을 위해 1초 기다림
-                time.sleep(1)
+                # 나머지 요소들 로딩을 위해 0.5초 기다림
+                time.sleep(0.5)
             # timeout 시 return false
             except TimeoutError:
                 return False
 
             # option에서 지정한 갯수만큼 위에서 검사
             for i in range(self.option.observe_num_of_items):
-                xpaths = [
-                    # 일반실 예약하기 버튼 내 span xpath
-                    f'//*[@id="result-form"]/fieldset/div[6]/table/tbody/tr[{i + 1}]/td[7]/a/span',
-                    # 특실 예약하기 버튼 내 span xpath
-                    f'//*[@id="result-form"]/fieldset/div[6]/table/tbody/tr[{i + 1}]/td[6]/a/span',
-                ]
+                xpaths = [ f'//*[@id="result-form"]/fieldset/div[6]/table/tbody/tr[{i + 1}]/td[7]/a/span' ]
+
+                # 특실도 확인해야 한다면
+                if self.option.check_suite:
+                    # 특실 예약하기 버튼 내 span xpath 추가
+                    xpaths.append(f'//*[@id="result-form"]/fieldset/div[6]/table/tbody/tr[{i + 1}]/td[6]/a/span')
 
                 # 지정된 xpath를 순회
                 for xpath in xpaths:
@@ -123,17 +124,23 @@ class webController:
                     # span이 있고, text가 예약하기라면
                     if len(spans) and spans[0].text == '예약하기':
                         # 부모 element를 클릭
-                        spans[0].find_element('xpath', '..').click()
-                        return True
+                        spans[0].find_element('xpath', '..').send_keys(Keys.ENTER)
 
-        return True
+                        # 로딩 기다리기
+                        driver.implicitly_wait(5)
+                        time.sleep(0.5)
+
+
+                        try:
+                            # "잔여석이 없습니다." 페이지일 때
+                            driver.find_element('xpath', '//*[@id="wrap"]/div[4]/div/div[2]/div[7]/a')
+                            # 뒤로가기
+                            driver.back()
+                        except:
+                            # 예약이 가능할 때 True 반환
+                            return True
+
+        return False
 
     def close(self):
         self.driver.close()
-
-    def is_closed(self):
-        try:
-            _ = self.driver.current_window_handle
-            return False
-        except:
-            return True
