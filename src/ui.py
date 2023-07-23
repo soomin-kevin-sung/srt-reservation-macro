@@ -3,6 +3,8 @@ from datetime import date
 from PySide6 import QtUiTools
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QPushButton, QLineEdit, QComboBox, QCheckBox, QDateEdit, QMessageBox
+
+from frmMain import Ui_frmMain
 from webController import webControllerOption, webController
 
 
@@ -12,7 +14,8 @@ def show_messagebox(message):
     msgbox.setWindowFlag(Qt.WindowStaysOnTopHint, True)
     msgbox.exec()
 
-class frmMain(QWidget):
+
+class frmMain(QWidget, Ui_frmMain):
     # type hint
     txtID: QLineEdit
     txtPassword: QLineEdit
@@ -25,7 +28,9 @@ class frmMain(QWidget):
 
     def __init__(self):
         super().__init__()
-        QtUiTools.QUiLoader().load('ui/frmMain.ui', self)
+
+        # setup Ui
+        self.setupUi(self)
 
         # set window title
         self.setWindowTitle('SRT 예약 매크로')
@@ -96,6 +101,6 @@ class frmMain(QWidget):
         except Exception as e:
             # 오류 발생 시 메시지 띄우고 실패
             show_messagebox(f'매크로 실행 실패\n오류내용:\n{e}')
-            
+
             # webController 종료
             wc.close()

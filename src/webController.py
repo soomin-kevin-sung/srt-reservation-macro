@@ -28,11 +28,11 @@ class webController:
         # 변수 설정
         self.is_logged_in = False
         self.option = option
-        
+
         # detach option 추가
         options = Options()
         options.add_experimental_option("detach", True)
-        
+
         # driver 설정
         self.driver = webdriver.Chrome(options=options)
 
@@ -55,6 +55,9 @@ class webController:
 
         # 버튼 클릭
         driver.find_element('xpath', '//*[@id="login-form"]/fieldset/div[1]/div[1]/div[3]/div/div[2]/input').click()
+
+        # 기다리기
+        time.sleep(0.5)
 
         # 로그인 실패 시 (경고창 발생)
         try:
@@ -110,7 +113,7 @@ class webController:
 
             # option에서 지정한 갯수만큼 위에서 검사
             for i in range(self.option.observe_num_of_items):
-                xpaths = [ f'//*[@id="result-form"]/fieldset/div[6]/table/tbody/tr[{i + 1}]/td[7]/a/span' ]
+                xpaths = [f'//*[@id="result-form"]/fieldset/div[6]/table/tbody/tr[{i + 1}]/td[7]/a/span']
 
                 # 특실도 확인해야 한다면
                 if self.option.check_suite:
@@ -129,7 +132,6 @@ class webController:
                         # 로딩 기다리기
                         driver.implicitly_wait(5)
                         time.sleep(0.5)
-
 
                         try:
                             # "잔여석이 없습니다." 페이지일 때
